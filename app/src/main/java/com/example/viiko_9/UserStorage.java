@@ -3,28 +3,30 @@ package com.example.viiko_9;
 import java.util.ArrayList;
 
 public class UserStorage {
-    private final ArrayList<User>users;
-    private static  UserStorage file = new UserStorage();
-    private  UserStorage(){
-        users=new ArrayList<>();
-    }
-    public static UserStorage file(){
-        if (file == null){
-            file = new UserStorage();
-        }
-        return file;
+    private ArrayList<User> users = new ArrayList<>();
+    private static UserStorage instance = null;
+
+    private UserStorage() {
     }
 
-    public void addUser(User user){
+    public static UserStorage getInstance() {
+        if (instance == null) {
+            instance = new UserStorage();
+        }
+        return instance;
+    }
+
+    public void addUser(User user) {
         users.add(user);
     }
 
-    public void removeUser(int id) {
-        users.remove(id);
+    public void listUsers() {
+        for (User user : UserStorage.getInstance().getUsers()) {
+            System.out.println(user); // Assuming User class has a meaningful toString() method
+        }
     }
+
     public ArrayList<User> getUsers() {
         return users;
     }
-
-
 }
